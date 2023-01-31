@@ -113,7 +113,7 @@ import org.checkerframework.checker.initialization.qual.Initialized;
   private final SessionToken sessionToken;
   private final MediaSession instance;
   @Nullable private final PendingIntent sessionActivity;
-  private final PendingIntent mediaButtonIntent;
+  @Nullable private final PendingIntent mediaButtonIntent;
   @Nullable private final BroadcastReceiver broadcastReceiver;
   private final Handler applicationHandler;
   private final BitmapLoader bitmapLoader;
@@ -220,14 +220,7 @@ import org.checkerframework.checker.initialization.qual.Initialized;
       context.registerReceiver(broadcastReceiver, filter);
     } else {
       // Has MediaSessionService to revive playback after it's dead.
-      Intent intent = new Intent(Intent.ACTION_MEDIA_BUTTON, sessionUri);
-      intent.setComponent(mbrComponent);
-      if (Util.SDK_INT >= 26) {
-        mediaButtonIntent =
-            PendingIntent.getForegroundService(context, 0, intent, pendingIntentFlagMutable);
-      } else {
-        mediaButtonIntent = PendingIntent.getService(context, 0, intent, pendingIntentFlagMutable);
-      }
+      mediaButtonIntent = null;
       broadcastReceiver = null;
     }
 

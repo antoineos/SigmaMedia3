@@ -123,7 +123,7 @@ import org.checkerframework.checker.initialization.qual.Initialized;
   public MediaSessionLegacyStub(
       MediaSessionImpl session,
       ComponentName mbrComponent,
-      PendingIntent mediaButtonIntent,
+      @Nullable PendingIntent mediaButtonIntent,
       Handler handler) {
     sessionImpl = session;
     Context context = sessionImpl.getContext();
